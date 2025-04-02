@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Passport;
-
 
 class AuthController extends Controller
 {
@@ -25,7 +23,9 @@ class AuthController extends Controller
             'role_id' => $validated['role_id']
         ]);
 
-        return response()->json(['token' => $user->createToken('API Token')->accessToken]);
+        return response()->json([
+            'token' => $user->createToken('API Token')->accessToken
+        ]);
     }
 
     public function login(Request $request) {
@@ -36,11 +36,9 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401);
-        }
 
-        return response()->json(['token' => $user->createToken('API Token')->accessToken]);
+        return response()->json([
+            'token' => $user->createToken('API Token')->accessToken
+        ]);
     }
 }
-
